@@ -1,21 +1,35 @@
 #!/bin/sh
-# Reorder the tmux status lines so the muted keybinding cheatsheet sits ABOVE
-# oh-my-tmux's colourful main bar.
+# Build a 3-line tmux status stack (top -> bottom):
+#   [0] app-context cheatsheet  — switches on #{pane_current_command} (vim, pager, ...)
+#   [1] tmux prefix cheatsheet  — static
+#   [2] oh-my-tmux main bar     — the colourful bar, pinned to the bottom edge
 #
-# tmux draws status-format[0] as the TOP line of the status group and higher
-# indices nearer the anchored (bottom) edge. So to keep the main bar pinned to
-# the bottom with the cheatsheet above it, the main bar must live on line [1]
-# and the cheatsheet on line [0].
+# tmux draws status-format[0] as the TOP line and higher indices toward the
+# anchored (bottom) edge, so the main bar must live on the highest index.
 #
-# oh-my-tmux never sets status-format itself — its bar renders from tmux's
-# default status-format[0] template (which pulls in status-left / window-list /
-# status-right). We copy that template onto line [1], then claim line [0].
+# Reload-safe: the pristine main-bar template (tmux's default status-format[0])
+# is stashed in @omt_main_format on first run. To find it we scan the current
+# status-format lines for the first one that isn't a cheatsheet of ours — this
+# also recovers it cleanly when upgrading a server that already had 2 lines.
 #
 # Invoked from ~/.config/tmux/tmux.conf.local via run-shell.
 
-main=$(tmux show -gv 'status-format[0]' 2>/dev/null)
-[ -n "$main" ] || main='#[align=left]#{T;=/#{status-left-length}:status-left}#[list=on align=#{status-justify}]#{W:#{T:window-status-format}#{window-status-separator},#{T:window-status-current-format}#{window-status-separator}}#[nolist align=right]#{T;=/#{status-right-length}:status-right}'
+MARK='fill=#3c3836'   # marker present in our custom lines, never in tmux's default bar
 
-tmux set -g 'status-format[1]' "$main"
-tmux set -g 'status-format[0]' '#[align=centre,fill=#3c3836,bg=#3c3836,fg=#928374]#[fg=#fe8019]prefix#[fg=#928374]   #[fg=#d79921]-#[fg=#928374] split↓   #[fg=#d79921]_#[fg=#928374] split→   #[fg=#d79921]c#[fg=#928374] new-win   #[fg=#d79921]x#[fg=#928374] kill-pane   #[fg=#d79921]&#[fg=#928374] kill-win   #[fg=#d79921]hjkl#[fg=#928374] move   #[fg=#d79921]HJKL#[fg=#928374] resize   #[fg=#d79921]z#[fg=#928374] zoom   #[fg=#d79921]Space#[fg=#928374] arrange   #[fg=#d79921]q#[fg=#928374] pick   #[fg=#d79921]Tab#[fg=#928374] last   #[fg=#d79921]d#[fg=#928374] detach'
-tmux set -g status 2
+orig=$(tmux show -gv '@omt_main_format' 2>/dev/null)
+if [ -z "$orig" ]; then
+  for idx in 0 1 2 3 4; do
+    c=$(tmux show -gv "status-format[$idx]" 2>/dev/null)
+    [ -z "$c" ] && continue
+    case "$c" in *"$MARK"*) continue ;; esac   # one of our cheatsheet lines
+    orig="$c"; break                            # first real (non-cheatsheet) template
+  done
+  [ -n "$orig" ] && tmux set -gq '@omt_main_format' "$orig"
+fi
+[ -n "$orig" ] || orig='#[align=left]#{T;=/#{status-left-length}:status-left}#[list=on align=#{status-justify}]#{W:#{T:window-status-format}#{window-status-separator},#{T:window-status-current-format}#{window-status-separator}}#[nolist align=right]#{T;=/#{status-right-length}:status-right}'
+
+tmux set -g 'status-format[2]' "$orig"
+tmux set -g 'status-format[1]' '#[align=centre,fill=#3c3836,bg=#3c3836,fg=#928374]#[fg=#fe8019]prefix#[fg=#928374]   #[fg=#d79921]-#[fg=#928374] split↓   #[fg=#d79921]_#[fg=#928374] split→   #[fg=#d79921]c#[fg=#928374] new-win   #[fg=#d79921]x#[fg=#928374] kill-pane   #[fg=#d79921]&#[fg=#928374] kill-win   #[fg=#d79921]hjkl#[fg=#928374] move   #[fg=#d79921]HJKL#[fg=#928374] resize   #[fg=#d79921]z#[fg=#928374] zoom   #[fg=#d79921]Space#[fg=#928374] arrange   #[fg=#d79921]q#[fg=#928374] pick   #[fg=#d79921]Tab#[fg=#928374] last   #[fg=#d79921]d#[fg=#928374] detach'
+tmux set -g 'status-format[0]' '#[align=centre,fill=#3c3836,bg=#3c3836,fg=#928374]#{?#{m:*vim,#{pane_current_command}},#[fg=#8ec07c]VIM#[fg=#928374]   #[fg=#b8bb26]:w#[fg=#928374] write   #[fg=#b8bb26]:q#[fg=#928374] quit   #[fg=#b8bb26]:wq#[fg=#928374] save+quit   #[fg=#b8bb26]:q!#[fg=#928374] discard   #[fg=#b8bb26]dd#[fg=#928374] cut   #[fg=#b8bb26]yy#[fg=#928374] yank   #[fg=#b8bb26]p#[fg=#928374] paste   #[fg=#b8bb26]u#[fg=#928374] undo   #[fg=#b8bb26]^r#[fg=#928374] redo   #[fg=#b8bb26]/#[fg=#928374] search   #[fg=#b8bb26]n/N#[fg=#928374] next/prev   #[fg=#b8bb26]gg/G#[fg=#928374] top/bot   #[fg=#b8bb26]:%s///#[fg=#928374] replace   #[fg=#b8bb26]v#[fg=#928374] visual,#{?#{||:#{==:#{pane_current_command},less},#{==:#{pane_current_command},man}},#[fg=#8ec07c]PAGER#[fg=#928374]   #[fg=#b8bb26]Space#[fg=#928374] page   #[fg=#b8bb26]b#[fg=#928374] back   #[fg=#b8bb26]/#[fg=#928374] search   #[fg=#b8bb26]n/N#[fg=#928374] next/prev   #[fg=#b8bb26]g/G#[fg=#928374] top/bot   #[fg=#b8bb26]q#[fg=#928374] quit,#[fg=#665c54]#{pane_current_command}}}'
+tmux set -g status 3
+tmux set -g status-interval 2   # refresh the app-context line promptly
