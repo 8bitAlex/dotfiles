@@ -1,0 +1,11 @@
+# This template is rendered to ~/.gitconfig by install.sh so your name/email and
+# GPG signing key stay OUT of the (public) repo history. Placeholders in {{ }}
+# are filled in per-machine at install time.
+[user]
+	name = {{GIT_NAME}}
+	email = {{GIT_EMAIL}}
+	signingkey = {{GIT_SIGNINGKEY}}
+[commit]
+	gpgsign = {{GPGSIGN}}
+[tag]
+	gpgSign = {{GPGSIGN}}

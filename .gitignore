@@ -1,0 +1,8 @@
+# backups created by install.sh
+*.bak
+
+# rendered locally, never tracked (contains personal name/email/GPG key)
+.gitconfig
+
+# OS cruft
+.DS_Store
