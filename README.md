@@ -27,6 +27,7 @@ package/framework steps and just refreshes the symlinks + `~/.gitconfig`.
 | `config/starship.toml`             | `~/.config/starship.toml`           |
 | `config/tmux/tmux.conf.local`      | `~/.config/tmux/tmux.conf.local`    |
 | `config/tmux/cheatsheet-bar.sh`    | `~/.config/tmux/cheatsheet-bar.sh`  |
+| `config/ghostty/config`            | `~/.config/ghostty/config`          |
 | `Brewfile`                         | consumed by `brew bundle`           |
 
 \* `~/.gitconfig` is **generated**, not symlinked: `install.sh` prompts for

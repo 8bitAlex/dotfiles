@@ -89,6 +89,7 @@ link_dotfiles() {
   link "$DOTFILES/config/starship.toml"           "$HOME/.config/starship.toml"
   link "$DOTFILES/config/tmux/tmux.conf.local"    "$HOME/.config/tmux/tmux.conf.local"
   link "$DOTFILES/config/tmux/cheatsheet-bar.sh"  "$HOME/.config/tmux/cheatsheet-bar.sh"
+  link "$DOTFILES/config/ghostty/config"          "$HOME/.config/ghostty/config"
   chmod +x "$DOTFILES/config/tmux/cheatsheet-bar.sh"
 }
 

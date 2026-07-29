@@ -1,0 +1,20 @@
+# Ghostty configuration — part of ~/code/dotfiles
+# (symlinked to ~/.config/ghostty/config by install.sh)
+
+# --- colours -----------------------------------------------------------------
+# Match the gruvbox palette used by Starship (~/.config/starship.toml) and the
+# tmux status bar / pane borders. Background is #282828 (= tmux pane bg), so the
+# window padding below blends into a clean, uniform margin.
+theme = Gruvbox Dark
+
+# --- margin / padding --------------------------------------------------------
+# tmux cannot inset individual panes, so the "breathing room" comes from padding
+# the whole terminal window. window-padding-color = background makes the gap the
+# same #282828 as the panes; balance = true keeps it even on all sides.
+window-padding-x = 12
+window-padding-y = 12
+window-padding-balance = true
+window-padding-color = background
+
+# --- quality of life ---------------------------------------------------------
+mouse-hide-while-typing = true

@@ -143,7 +143,7 @@ tmux_conf_theme_focused_pane_bg="$tmux_conf_theme_colour_2"
 tmux_conf_theme_pane_border_style=thin
 
 # pane borders colours:
-tmux_conf_theme_pane_border="$tmux_conf_theme_colour_2"
+tmux_conf_theme_pane_border="$tmux_conf_theme_colour_17"   # gruvbox bg3 — visible solid border on inactive panes
 tmux_conf_theme_pane_active_border="$tmux_conf_theme_colour_4"
 %if #{>=:#{version},3.2}
 tmux_conf_theme_pane_active_border="#{?pane_in_mode,$tmux_conf_theme_colour_9,#{?synchronize-panes,$tmux_conf_theme_colour_16,$tmux_conf_theme_colour_4}}"
@@ -405,6 +405,10 @@ tmux_conf_urlscan_options="--compact --dedupe"
 
 # start with mouse mode enabled
 set -g mouse on
+
+# solid (heavy) pane borders — colours come from tmux_conf_theme_pane_* above
+#   inactive: gruvbox bg3 (#665c54)   active: gruvbox aqua (#689d6a)
+set -g pane-border-lines heavy
 
 # force Vi mode
 #   really you should export VISUAL or EDITOR environment variable, see manual
