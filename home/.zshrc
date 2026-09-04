@@ -119,10 +119,39 @@ export PATH="$HOME/.local/bin:$PATH"
 eval "$(starship init zsh)"
 export GPG_TTY=$(tty)
 
+# Break-glass recovery for a wedged gpg (usually a stale keyring lock left by a
+# keyboxd/gpg-agent that died without cleaning up). Killing the daemons first is
+# what makes removing the lock files safe -- nothing can still be holding them.
+gpg-unstick() {
+  emulate -L zsh
+  setopt null_glob
+  local d="${GNUPGHOME:-$HOME/.gnupg}"
+  gpgconf --kill all
+  rm -f "$d"/*.lock "$d"/".#lk"* "$d"/public-keys.d/*.lock "$d"/public-keys.d/".#lk"*
+  gpgconf --launch gpg-agent
+  gpgconf --launch keyboxd
+  if gpg --list-secret-keys >/dev/null 2>&1; then
+    print "gpg: OK"
+  else
+    print -u2 "gpg: still broken -- check 'gpgconf --launch keyboxd' output"
+  fi
+}
+
+eval "$(rbenv init -)"
+
+# Everything above this point has to run before the tmux exec below, which
+# replaces the shell and never returns.
+#
 # Start a fresh tmux session on each new interactive shell (oh-my-tmux).
 # Every window gets its own independent, auto-numbered session.
 # Wards: skip if already inside tmux, only for interactive shells,
 # and only if tmux is installed.
-if [[ -z "$TMUX" ]] && [[ -o interactive ]] && command -v tmux &>/dev/null; then
+#
+# VSCODE_RESOLVING_ENVIRONMENT is VS Code's own marker for the throwaway
+# interactive login shell it runs to capture the environment its extension host
+# will inherit. That shell is interactive and outside tmux, so without this ward
+# it execs into tmux, never returns, and VS Code gives up with an empty
+# environment -- taking PATH and CLAUDE_CONFIG_DIR down with it.
+if [[ -z "$TMUX" ]] && [[ -o interactive ]] && [[ -z "$VSCODE_RESOLVING_ENVIRONMENT" ]] && command -v tmux &>/dev/null; then
   exec tmux new-session
 fi

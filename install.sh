@@ -85,6 +85,7 @@ install_omt() {
 # --- 5. Symlink dotfiles -----------------------------------------------------
 link_dotfiles() {
   log "Linking dotfiles"
+  link "$DOTFILES/home/.zshenv"                   "$HOME/.zshenv"
   link "$DOTFILES/home/.zshrc"                    "$HOME/.zshrc"
   link "$DOTFILES/config/starship.toml"           "$HOME/.config/starship.toml"
   link "$DOTFILES/config/tmux/tmux.conf.local"    "$HOME/.config/tmux/tmux.conf.local"
