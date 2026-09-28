@@ -138,20 +138,3 @@ gpg-unstick() {
 }
 
 eval "$(rbenv init -)"
-
-# Everything above this point has to run before the tmux exec below, which
-# replaces the shell and never returns.
-#
-# Start a fresh tmux session on each new interactive shell (oh-my-tmux).
-# Every window gets its own independent, auto-numbered session.
-# Wards: skip if already inside tmux, only for interactive shells,
-# and only if tmux is installed.
-#
-# VSCODE_RESOLVING_ENVIRONMENT is VS Code's own marker for the throwaway
-# interactive login shell it runs to capture the environment its extension host
-# will inherit. That shell is interactive and outside tmux, so without this ward
-# it execs into tmux, never returns, and VS Code gives up with an empty
-# environment -- taking PATH and CLAUDE_CONFIG_DIR down with it.
-if [[ -z "$TMUX" ]] && [[ -o interactive ]] && [[ -z "$VSCODE_RESOLVING_ENVIRONMENT" ]] && command -v tmux &>/dev/null; then
-  exec tmux new-session
-fi
