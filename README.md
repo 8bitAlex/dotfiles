@@ -47,7 +47,7 @@ stay out of this (public) repo.
 
 ## Notes
 
-- The zsh config auto-starts a fresh tmux session on each interactive shell.
+- tmux doesn't start automatically; run `tmux` to open a session.
 - A **Nerd Font** is required for the prompt glyphs and tmux powerline
   separators — the Brewfile installs `font-meslo-lg-nerd-font`; set your
   terminal to it after install.

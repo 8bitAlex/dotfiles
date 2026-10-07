@@ -151,7 +151,7 @@ main() {
   link_dotfiles
   render_gitconfig
   set_default_shell
-  log "All set. Start a new terminal (a fresh tmux session will auto-launch)."
+  log "All set. Start a new terminal."
 }
 
 main "$@"
