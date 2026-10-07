@@ -39,3 +39,10 @@ window-padding-color = background
 
 # --- quality of life ---------------------------------------------------------
 mouse-hide-while-typing = true
+
+# --- Quick Terminal ----------------------------------------------------------
+keybind = global:option+space=toggle_quick_terminal
+quick-terminal-position = top
+quick-terminal-autohide = true
+background-opacity = 0.85
+background-blur = true
