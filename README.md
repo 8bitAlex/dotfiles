@@ -1,8 +1,9 @@
 # dotfiles
 
 My shell environment — zsh (Oh My Zsh), the [Starship](https://starship.rs)
-prompt (Gruvbox Rainbow), and [Oh My Tmux](https://github.com/gpakosz/.tmux)
-with a custom Gruvbox status bar + a keybinding cheatsheet row.
+prompt (Gruvbox Rainbow layout), and [Oh My Tmux](https://github.com/gpakosz/.tmux)
+with a custom status bar + a keybinding cheatsheet row, all colored with my
+Machinist palette (Ghostty, Starship, and tmux share it).
 
 ## New machine
 

@@ -86,24 +86,24 @@ tmux_conf_24b_colour=auto
 tmux_conf_theme=enabled
 
 # default theme
-# gruvbox_dark palette — matches ~/.config/starship.toml (Gruvbox Rainbow)
-tmux_conf_theme_colour_1="#282828"    # gruvbox bg0    — status bar background
-tmux_conf_theme_colour_2="#3c3836"    # gruvbox bg1    — pane border / last-window bg
-tmux_conf_theme_colour_3="#a89984"    # gruvbox gray   — inactive window / status text
-tmux_conf_theme_colour_4="#689d6a"    # gruvbox aqua   — current window / active pane border
-tmux_conf_theme_colour_5="#d79921"    # gruvbox yellow — message / copy-mode bg
-tmux_conf_theme_colour_6="#fbf1c7"    # gruvbox fg0    — status-left section 1 text
-tmux_conf_theme_colour_7="#fbf1c7"    # gruvbox fg0    — status-left section 2 text
-tmux_conf_theme_colour_8="#fbf1c7"    # gruvbox fg0    — status-left section 3 text
-tmux_conf_theme_colour_9="#d65d0e"    # gruvbox orange — status-left section 1 bg (session)
-tmux_conf_theme_colour_10="#d79921"   # gruvbox yellow — status-left section 2 bg (uptime)
-tmux_conf_theme_colour_11="#689d6a"   # gruvbox aqua   — status-left section 3 bg
-tmux_conf_theme_colour_12="#fbf1c7"   # gruvbox fg0    — status-right section 1 text
-tmux_conf_theme_colour_13="#fbf1c7"   # gruvbox fg0    — status-right section 2 text
-tmux_conf_theme_colour_14="#fbf1c7"   # gruvbox fg0    — status-right section 3 text
-tmux_conf_theme_colour_15="#689d6a"   # gruvbox aqua   — status-right section 1 bg
-tmux_conf_theme_colour_16="#458588"   # gruvbox blue   — status-right section 2 bg
-tmux_conf_theme_colour_17="#665c54"   # gruvbox bg3    — status-right section 3 bg
+# machinist palette — matches ~/.config/starship.toml (same segment gradient)
+tmux_conf_theme_colour_1="#211e20"    # background     — status bar background
+tmux_conf_theme_colour_2="#3b3638"    # segment 6      — pane border / last-window bg
+tmux_conf_theme_colour_3="#a0a08b"    # muted          — inactive window / status text
+tmux_conf_theme_colour_4="#5ab9a8"    # cyan           — current window / active pane border
+tmux_conf_theme_colour_5="#40985e"    # segment 2      — message / copy-mode bg
+tmux_conf_theme_colour_6="#211e20"    # dark text      — status-left section 1 text
+tmux_conf_theme_colour_7="#211e20"    # dark text      — status-left section 2 text
+tmux_conf_theme_colour_8="#e9efec"    # light text     — status-left section 3 text
+tmux_conf_theme_colour_9="#94e344"    # segment 1      — status-left section 1 bg (session)
+tmux_conf_theme_colour_10="#40985e"   # segment 2      — status-left section 2 bg (uptime)
+tmux_conf_theme_colour_11="#1a644e"   # segment 3      — status-left section 3 bg
+tmux_conf_theme_colour_12="#e9efec"   # light text     — status-right section 1 text
+tmux_conf_theme_colour_13="#e9efec"   # light text     — status-right section 2 text
+tmux_conf_theme_colour_14="#e9efec"   # light text     — status-right section 3 text
+tmux_conf_theme_colour_15="#1a644e"   # segment 3      — status-right section 1 bg
+tmux_conf_theme_colour_16="#04373b"   # segment 4      — status-right section 2 bg
+tmux_conf_theme_colour_17="#555568"   # segment 5      — status-right section 3 bg
 
 # default theme (ansi)
 #tmux_conf_theme_colour_1="colour0"
@@ -143,7 +143,7 @@ tmux_conf_theme_focused_pane_bg="$tmux_conf_theme_colour_2"
 tmux_conf_theme_pane_border_style=thin
 
 # pane borders colours:
-tmux_conf_theme_pane_border="$tmux_conf_theme_colour_17"   # gruvbox bg3 — visible solid border on inactive panes
+tmux_conf_theme_pane_border="$tmux_conf_theme_colour_17"   # segment 5 — visible solid border on inactive panes
 tmux_conf_theme_pane_active_border="$tmux_conf_theme_colour_4"
 %if #{>=:#{version},3.2}
 tmux_conf_theme_pane_active_border="#{?pane_in_mode,$tmux_conf_theme_colour_9,#{?synchronize-panes,$tmux_conf_theme_colour_16,$tmux_conf_theme_colour_4}}"
@@ -216,7 +216,7 @@ tmux_conf_theme_window_status_format="#I #W#{?#{||:#{window_bell_flag},#{window_
 #     - #{username}
 #     - #{username_ssh}
 tmux_conf_theme_window_status_current_fg="$tmux_conf_theme_colour_1"
-tmux_conf_theme_window_status_current_bg="$tmux_conf_theme_colour_5"    # gruvbox yellow — current window (starship "directory" slot)
+tmux_conf_theme_window_status_current_bg="$tmux_conf_theme_colour_5"    # segment 2 — current window (starship "directory" slot)
 tmux_conf_theme_window_status_current_attr="bold"
 tmux_conf_theme_window_status_current_format="#I #W#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,}"
 #tmux_conf_theme_window_status_current_format="#{circled_window_index} #W#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,}"
@@ -233,7 +233,7 @@ tmux_conf_theme_window_status_bell_bg="default"
 tmux_conf_theme_window_status_bell_attr="blink,bold"
 
 # window last status style
-tmux_conf_theme_window_status_last_fg="$tmux_conf_theme_colour_4"    # gruvbox aqua — last-active window
+tmux_conf_theme_window_status_last_fg="$tmux_conf_theme_colour_4"    # cyan — last-active window
 tmux_conf_theme_window_status_last_bg="$tmux_conf_theme_colour_2"
 tmux_conf_theme_window_status_last_attr="none"
 
@@ -407,7 +407,7 @@ tmux_conf_urlscan_options="--compact --dedupe"
 set -g mouse on
 
 # solid (heavy) pane borders — colours come from tmux_conf_theme_pane_* above
-#   inactive: gruvbox bg3 (#665c54)   active: gruvbox aqua (#689d6a)
+#   inactive: segment 5 (#555568)   active: cyan (#5ab9a8)
 set -g pane-border-lines heavy
 
 # force Vi mode

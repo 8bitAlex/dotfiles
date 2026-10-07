@@ -30,7 +30,20 @@ $time\
 [ ](fg:color_bg1)\
 $line_break$character"""
 
-palette = 'gruvbox_dark'
+palette = 'machinist'
+
+[palettes.machinist]
+color_fg0 = '#e9efec'
+color_bg0 = '#211e20'
+color_bg1 = '#3b3638'
+color_bg3 = '#555568'
+color_orange = '#94e344'
+color_yellow = '#40985e'
+color_aqua = '#1a644e'
+color_blue = '#04373b'
+color_green = '#94e344'
+color_purple = '#d65ca6'
+color_red = '#e0604f'
 
 [palettes.gruvbox_dark]
 color_fg0 = '#fbf1c7'
@@ -46,7 +59,7 @@ color_yellow = '#d79921'
 
 [os]
 disabled = false
-style = "bg:color_orange fg:color_fg0"
+style = "bg:color_orange fg:color_bg0"
 
 [os.symbols]
 Windows = "󰍲"
@@ -74,12 +87,12 @@ Pop = ""
 
 [username]
 show_always = true
-style_user = "bg:color_orange fg:color_fg0"
-style_root = "bg:color_orange fg:color_fg0"
+style_user = "bg:color_orange fg:color_bg0"
+style_root = "bg:color_orange fg:color_bg0"
 format = '[ $user ]($style)'
 
 [directory]
-style = "fg:color_fg0 bg:color_yellow"
+style = "fg:color_bg0 bg:color_yellow"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
@@ -158,11 +171,11 @@ format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
 [docker_context]
 symbol = ""
 style = "bg:color_bg3"
-format = '[[ $symbol( $context) ](fg:#83a598 bg:color_bg3)]($style)'
+format = '[[ $symbol( $context) ](fg:color_fg0 bg:color_bg3)]($style)'
 
 [conda]
 style = "bg:color_bg3"
-format = '[[ $symbol( $environment) ](fg:#83a598 bg:color_bg3)]($style)'
+format = '[[ $symbol( $environment) ](fg:color_fg0 bg:color_bg3)]($style)'
 
 [pixi]
 style = "bg:color_bg3"
