@@ -1,9 +1,11 @@
 # dotfiles
 
-My shell environment — zsh (Oh My Zsh), the [Starship](https://starship.rs)
-prompt (Gruvbox Rainbow layout), and [Oh My Tmux](https://github.com/gpakosz/.tmux)
-with a custom status bar + a keybinding cheatsheet row, all colored with my
-Machinist palette (Ghostty, Starship, and tmux share it).
+My shell environment — zsh (Oh My Zsh) with my
+[Machinist](https://github.com/8bitAlex/Machinist) theme, which draws a
+[Starship](https://starship.rs) prompt (Gruvbox Rainbow layout), and
+[Oh My Tmux](https://github.com/gpakosz/.tmux) with a custom status bar + a
+keybinding cheatsheet row, all colored with the Machinist palette (Ghostty,
+the prompt, and tmux share it).
 
 ## New machine
 
@@ -25,7 +27,6 @@ package/framework steps and just refreshes the symlinks + `~/.gitconfig`.
 |------------------------------------|------------------------------------|
 | `home/.zshrc`                      | `~/.zshrc`                          |
 | `home/.gitconfig.template`         | rendered to `~/.gitconfig`\*        |
-| `config/starship.toml`             | `~/.config/starship.toml`           |
 | `config/tmux/tmux.conf.local`      | `~/.config/tmux/tmux.conf.local`    |
 | `config/tmux/cheatsheet-bar.sh`    | `~/.config/tmux/cheatsheet-bar.sh`  |
 | `config/ghostty/config`            | `~/.config/ghostty/config`          |
@@ -40,6 +41,8 @@ stay out of this (public) repo.
 - **Oh My Zsh** → `~/.oh-my-zsh` (upstream framework, self-updating)
 - **Oh My Tmux** → `~/.local/share/tmux/oh-my-tmux`; `~/.config/tmux/tmux.conf`
   is symlinked to its `.tmux.conf`. My overrides live in `tmux.conf.local`.
+- **Machinist** → `~/code/machinist`; its `machinist.zsh-theme` is symlinked
+  into `~/.oh-my-zsh/custom/themes`, and brings its own Starship config.
 
 ## Notes
 

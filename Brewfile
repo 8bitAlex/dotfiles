@@ -3,7 +3,7 @@
 
 # Shell + prompt
 brew "zsh"
-brew "starship"        # prompt (config: ~/.config/starship.toml)
+brew "starship"        # prompt engine for the machinist Oh My Zsh theme
 
 # Terminal multiplexer
 brew "tmux"            # oh-my-tmux config lives in ~/.config/tmux

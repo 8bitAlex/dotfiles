@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # Dotfiles installer — sets up a new machine with my shell environment:
-#   Homebrew packages, Oh My Zsh, Oh My Tmux, Starship, and my dotfiles
+#   Homebrew packages, Oh My Zsh, Oh My Tmux, Machinist, and my dotfiles
 #   (symlinked back to this repo so edits stay tracked).
 #
 # Usage:
@@ -17,6 +17,7 @@ set -euo pipefail
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 OMZ_DIR="$HOME/.oh-my-zsh"
 OMT_DIR="$HOME/.local/share/tmux/oh-my-tmux"
+MACHINIST_DIR="$HOME/code/machinist"
 
 # --- pretty logging ----------------------------------------------------------
 if [ -t 1 ]; then BLUE=$'\033[34m'; GREEN=$'\033[32m'; YELLOW=$'\033[33m'; RESET=$'\033[0m'; else BLUE=; GREEN=; YELLOW=; RESET=; fi
@@ -82,19 +83,26 @@ install_omt() {
   link "$OMT_DIR/.tmux.conf" "$HOME/.config/tmux/tmux.conf"
 }
 
-# --- 5. Symlink dotfiles -----------------------------------------------------
+# --- 5. Machinist (my theme, installed fresh) --------------------------------
+install_machinist() {
+  if [ -d "$MACHINIST_DIR" ]; then ok "Machinist present"; return; fi
+  log "Cloning Machinist"
+  git clone https://github.com/8bitAlex/Machinist.git "$MACHINIST_DIR"
+}
+
+# --- 6. Symlink dotfiles -----------------------------------------------------
 link_dotfiles() {
   log "Linking dotfiles"
   link "$DOTFILES/home/.zshenv"                   "$HOME/.zshenv"
   link "$DOTFILES/home/.zshrc"                    "$HOME/.zshrc"
-  link "$DOTFILES/config/starship.toml"           "$HOME/.config/starship.toml"
+  link "$MACHINIST_DIR/ports/oh-my-zsh/machinist.zsh-theme" "$OMZ_DIR/custom/themes/machinist.zsh-theme"
   link "$DOTFILES/config/tmux/tmux.conf.local"    "$HOME/.config/tmux/tmux.conf.local"
   link "$DOTFILES/config/tmux/cheatsheet-bar.sh"  "$HOME/.config/tmux/cheatsheet-bar.sh"
   link "$DOTFILES/config/ghostty/config"          "$HOME/.config/ghostty/config"
   chmod +x "$DOTFILES/config/tmux/cheatsheet-bar.sh"
 }
 
-# --- 6. Render ~/.gitconfig from the template (kept out of the repo) ----------
+# --- 7. Render ~/.gitconfig from the template (kept out of the repo) ----------
 render_gitconfig() {
   local tpl="$DOTFILES/home/.gitconfig.template" dst="$HOME/.gitconfig"
   if [ -e "$dst" ] && [ ! -L "$dst" ]; then
@@ -118,7 +126,7 @@ render_gitconfig() {
   ok "wrote $dst"
 }
 
-# --- 7. Make zsh the login shell --------------------------------------------
+# --- 8. Make zsh the login shell --------------------------------------------
 set_default_shell() {
   local zsh_path; zsh_path="$(command -v zsh)"
   if [ "${SHELL:-}" = "$zsh_path" ]; then ok "login shell already zsh"; return; fi
@@ -138,6 +146,7 @@ main() {
   install_packages
   install_omz
   install_omt
+  install_machinist
   link_dotfiles
   render_gitconfig
   set_default_shell

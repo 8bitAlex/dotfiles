@@ -14,10 +14,9 @@ export PATH=$(brew --prefix)/bin:$PATH
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# NOTE: The prompt is provided by Starship (see the `starship init` line below,
-# config at ~/.config/starship.toml). ZSH_THEME is left empty so Oh My Zsh does
-# not load its own theme — otherwise it would be silently overridden by Starship.
-ZSH_THEME=""
+# NOTE: The prompt comes from the machinist theme, which runs Starship with the
+# config bundled in ~/code/machinist (install.sh clones it and links the theme).
+ZSH_THEME="machinist"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -115,8 +114,6 @@ source $ZSH/oh-my-zsh.sh
 # Added by Apple Claude Code installer
 export PATH="$HOME/.local/bin:$PATH"
 
-# Starship prompt — the actual prompt/theme for this shell (config: ~/.config/starship.toml)
-eval "$(starship init zsh)"
 export GPG_TTY=$(tty)
 
 # Break-glass recovery for a wedged gpg (usually a stale keyring lock left by a
