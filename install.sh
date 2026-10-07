@@ -96,6 +96,7 @@ link_dotfiles() {
   link "$DOTFILES/home/.zshenv"                   "$HOME/.zshenv"
   link "$DOTFILES/home/.zshrc"                    "$HOME/.zshrc"
   link "$MACHINIST_DIR/ports/oh-my-zsh/machinist.zsh-theme" "$OMZ_DIR/custom/themes/machinist.zsh-theme"
+  link "$MACHINIST_DIR/ports/ghostty/machinist"             "$HOME/.config/ghostty/themes/machinist"
   link "$DOTFILES/config/tmux/tmux.conf.local"    "$HOME/.config/tmux/tmux.conf.local"
   link "$DOTFILES/config/tmux/cheatsheet-bar.sh"  "$HOME/.config/tmux/cheatsheet-bar.sh"
   link "$DOTFILES/config/ghostty/config"          "$HOME/.config/ghostty/config"

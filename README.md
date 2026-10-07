@@ -42,7 +42,8 @@ stay out of this (public) repo.
 - **Oh My Tmux** → `~/.local/share/tmux/oh-my-tmux`; `~/.config/tmux/tmux.conf`
   is symlinked to its `.tmux.conf`. My overrides live in `tmux.conf.local`.
 - **Machinist** → `~/code/machinist`; its `machinist.zsh-theme` is symlinked
-  into `~/.oh-my-zsh/custom/themes`, and brings its own Starship config.
+  into `~/.oh-my-zsh/custom/themes` (and brings its own Starship config), and
+  its dark Ghostty theme into `~/.config/ghostty/themes`.
 
 ## Notes
 

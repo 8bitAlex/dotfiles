@@ -2,36 +2,15 @@
 # (symlinked to ~/.config/ghostty/config by install.sh)
 
 # --- colours -----------------------------------------------------------------
-# Machinist palette, matching Starship (~/.config/starship.toml) and the tmux
-# status bar / pane borders. Background is #211e20 (= tmux pane bg), so the
-# window padding below blends into a clean, uniform margin.
-palette = 0=#3b3638
-palette = 1=#e0604f
-palette = 2=#40985e
-palette = 3=#d9a93a
-palette = 4=#5b8fc9
-palette = 5=#d65ca6
-palette = 6=#5ab9a8
-palette = 7=#a0a08b
-palette = 8=#85859a
-palette = 9=#f27a63
-palette = 10=#94e344
-palette = 11=#f0cc5a
-palette = 12=#84b3ec
-palette = 13=#e87fc0
-palette = 14=#7fd9c4
-palette = 15=#e9efec
-background = #211e20
-foreground = #e9efec
-cursor-color = #94e344
-cursor-text = #211e20
-selection-background = #04373b
-selection-foreground = #e9efec
+# Machinist, dark (linked from ~/code/machinist by install.sh), matching the
+# prompt and the tmux status bar / pane borders. Background is #211e20 (= tmux
+# pane bg), so the window padding below blends into a clean, uniform margin.
+theme = machinist
 
 # --- margin / padding --------------------------------------------------------
 # tmux cannot inset individual panes, so the "breathing room" comes from padding
 # the whole terminal window. window-padding-color = background makes the gap the
-# same #282828 as the panes; balance = true keeps it even on all sides.
+# same #211e20 as the panes; balance = true keeps it even on all sides.
 window-padding-x = 12
 window-padding-y = 12
 window-padding-balance = true
